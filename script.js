@@ -77,4 +77,15 @@ const displayMovements = (movements) => {
     containerMovements.insertAdjacentHTML('afterbegin', html);
   })
 }
-displayMovements(account1.movements)
+displayMovements(account1.movements);
+
+const createUsername = accs => {
+  accs.forEach(acc => {
+    acc.username = acc.owner
+    .toLowerCase()
+    .split(' ')
+    .map(name => name.at(0))
+    .join('');
+  })
+}
+createUsername(accounts);
