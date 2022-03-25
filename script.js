@@ -68,24 +68,30 @@ const displayMovements = (movements) => {
     const type = mov > 0 ? 'deposit' : 'withdrawal'
 
     const html = `
-    <div class="movements__row">
-     <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
-     <div class="movements__value">${mov}</div>
-    </div>
+      <div class="movements__row">
+          <div class="movements__type movements__type--${type}">${i + 1} ${type}</div>
+          <div class="movements__value">${mov}</div>
+      </div>
     `;
 
     containerMovements.insertAdjacentHTML('afterbegin', html);
   })
-}
+};
 displayMovements(account1.movements);
+
+const calcPrintBalance =  movements => {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR`;
+};
+calcPrintBalance(account1.movements);
 
 const createUsername = accs => {
   accs.forEach(acc => {
     acc.username = acc.owner
-    .toLowerCase()
-    .split(' ')
-    .map(name => name.at(0))
-    .join('');
+      .toLowerCase()
+      .split(' ')
+      .map(name => name.at(0))
+      .join('');
   })
 }
-createUsername(accounts);
+createUsername(accounts);  
